@@ -52,9 +52,22 @@ const RoomMapPage = () => {
         } else if (room.status === 'OCCUPIED') {
             setSelectedRoom(room); setModalType('CHECKOUT');
         } else if (room.status === 'CLEANING') {
-            setToast({ message: 'Phòng đang dọn dẹp, không thể thao tác', type: 'error' });
+            if (window.confirm(`Xác nhận phòng ${room.roomNumber} đã dọn dẹp xong và sẵn sàng đón khách?`)) {
+                handleCleanRoom(room.id);
+            }
         }
     };
+
+    const handleCleanRoom = async (roomId) => {
+        try {
+            await api.patch(`/rooms/${roomId}/status?status=AVAILABLE`);
+            setToast({ message: `Đã cập nhật phòng thành TRỐNG!`, type: 'success' });
+            fetchRooms();
+        } catch (error) {
+            setToast({ message: 'Lỗi khi cập nhật trạng thái phòng', type: 'error' });
+        }
+    };
+
 
     const closeModal = () => { setSelectedRoom(null); setModalType(null); };
 

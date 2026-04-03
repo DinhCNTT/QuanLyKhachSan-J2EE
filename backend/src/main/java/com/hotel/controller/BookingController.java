@@ -21,8 +21,25 @@ public class BookingController {
     }
 
     @PostMapping("/{bookingId}/checkout")
-    public ResponseEntity<Invoice> checkOut(@PathVariable String bookingId) {
-        return ResponseEntity.ok(bookingService.checkOut(bookingId));
+    public ResponseEntity<Invoice> checkOut(@PathVariable String bookingId,
+            @RequestBody(required = false) com.hotel.dto.CheckoutRequest request) {
+        return ResponseEntity.ok(bookingService.checkOut(bookingId, request));
+    }
+
+    @PostMapping("/{bookingId}/services")
+    public ResponseEntity<Booking> addServiceCharge(@PathVariable String bookingId,
+            @RequestBody com.hotel.model.ServiceCharge serviceCharge) {
+        return ResponseEntity.ok(bookingService.addServiceCharge(bookingId, serviceCharge));
+    }
+
+    @DeleteMapping("/{bookingId}/services/{index}")
+    public ResponseEntity<Booking> removeServiceCharge(@PathVariable String bookingId, @PathVariable int index) {
+        return ResponseEntity.ok(bookingService.removeServiceCharge(bookingId, index));
+    }
+
+    @PatchMapping("/{bookingId}/cancel")
+    public ResponseEntity<Booking> cancelBooking(@PathVariable String bookingId) {
+        return ResponseEntity.ok(bookingService.cancelBooking(bookingId));
     }
 
     @GetMapping("/active/{roomId}")

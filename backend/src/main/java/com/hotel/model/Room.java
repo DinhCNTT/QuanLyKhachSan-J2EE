@@ -25,7 +25,9 @@ public class Room {
 
     private RoomType type;
 
-    private Double price;
+    private Double price; // Daily Price
+    private Double priceHourly;
+    private Double priceOvernight;
 
     private RoomStatus status;
 

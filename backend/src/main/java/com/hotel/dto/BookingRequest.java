@@ -11,5 +11,7 @@ public class BookingRequest {
     private String cccd;
     private String phone;
     private LocalDate checkOutDate;
-    private LocalDate checkInDate; // Có thể để client gửi, hoặc server tự gán ngày hiện tại
+    private LocalDate checkInDate;
+    private String rentalType;
+    private Integer durationHours;
 }

@@ -12,5 +12,7 @@ import java.util.Optional;
 public interface BookingRepository extends MongoRepository<Booking, String> {
     Optional<Booking> findByRoomIdAndStatus(String roomId, BookingStatus status);
 
+    List<Booking> findByRoomIdAndStatusIn(String roomId, List<BookingStatus> statuses);
+
     List<Booking> findByStatus(BookingStatus status);
 }

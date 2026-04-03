@@ -26,6 +26,7 @@ public class Invoice {
     private String guestName;
 
     private Double totalAmount;
+    private String paymentMethod;
 
     @CreatedDate
     private LocalDateTime createdAt;

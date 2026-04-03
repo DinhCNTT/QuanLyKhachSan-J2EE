@@ -36,7 +36,12 @@ const RoomCard = ({ room, onClick, animIndex = 0 }) => {
             <div className={styles.cardBottom}>
                 <span className={styles.roomStatus}>{label}</span>
                 <span className={styles.roomPrice}>
-                    {room.price.toLocaleString('vi-VN')}đ
+                    {(() => {
+                        const prices = [room.price, room.priceHourly, room.priceOvernight].filter(Boolean);
+                        const minPrice = Math.min(...prices);
+                        const hasMultiple = prices.length > 1;
+                        return <>{hasMultiple && <small style={{ opacity: 0.8, fontSize: '0.65em' }}>Từ </small>}{minPrice.toLocaleString('vi-VN')}đ</>;
+                    })()}
                 </span>
             </div>
         </div>

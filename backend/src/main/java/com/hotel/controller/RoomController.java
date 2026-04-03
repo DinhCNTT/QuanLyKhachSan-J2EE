@@ -36,4 +36,11 @@ public class RoomController {
         roomService.deleteRoom(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Room> updateRoomStatus(
+            @PathVariable String id,
+            @RequestParam com.hotel.model.RoomStatus status) {
+        return ResponseEntity.ok(roomService.updateRoomStatus(id, status));
+    }
 }

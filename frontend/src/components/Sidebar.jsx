@@ -20,23 +20,27 @@ const Sidebar = () => {
             </div>
 
             <nav className={styles.sidebarNav}>
-                <NavLink to="/admin/rooms" className={({ isActive }) =>
+                <NavLink to={user?.role === 'ADMIN' ? '/admin/rooms' : '/receptionist/rooms'} className={({ isActive }) =>
                     `${styles.navItem} ${isActive ? styles.active : ''}`}>
                     <BedDouble size={20} />
-                    <span>Quản lý Phòng</span>
+                    <span>{user?.role === 'ADMIN' ? 'Quản lý Phòng' : 'Sơ đồ phòng'}</span>
                 </NavLink>
 
-                <NavLink to="/admin/staff" className={({ isActive }) =>
-                    `${styles.navItem} ${isActive ? styles.active : ''}`}>
-                    <Users size={20} />
-                    <span>Quản lý Nhân sự</span>
-                </NavLink>
+                {user?.role === 'ADMIN' && (
+                    <>
+                        <NavLink to="/admin/staff" className={({ isActive }) =>
+                            `${styles.navItem} ${isActive ? styles.active : ''}`}>
+                            <Users size={20} />
+                            <span>Quản lý Nhân sự</span>
+                        </NavLink>
 
-                <NavLink to="/admin/invoices" className={({ isActive }) =>
-                    `${styles.navItem} ${isActive ? styles.active : ''}`}>
-                    <ClipboardList size={20} />
-                    <span>Lịch sử Hóa đơn</span>
-                </NavLink>
+                        <NavLink to="/admin/invoices" className={({ isActive }) =>
+                            `${styles.navItem} ${isActive ? styles.active : ''}`}>
+                            <ClipboardList size={20} />
+                            <span>Lịch sử Hóa đơn</span>
+                        </NavLink>
+                    </>
+                )}
             </nav>
 
             <div className={styles.sidebarFooter}>
